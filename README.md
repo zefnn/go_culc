@@ -36,43 +36,68 @@ ___
 Запустите сервер и скопируйте команду в cmd
 
 1) Status 200 OK
+
+**Запрос**
 ```
 curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"2+2*2\"}" http://localhost:8080/api/v1/calculate
 ```
+
+**Ответ**
+
 ```
 {"result":6}
 ```
 
 2) Status 422 Unprocessable Entity: not enough operands
+
+**Запрос**
 ```
 curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"2+2*\"}" http://localhost:8080/api/v1/calculate
 ```
+
+**Ответ**
+
 ```
 {"error":"Expression is not valid: not enough operands"}
 ```
 
 3) Status 422 Unprocessable Entity: unbalanced brackets
+
+**Запрос**
 ```
 curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"2+2)\"}" http://localhost:8080/api/v1/calculate
 ```
+
+**Ответ**
+
 ```
 {"error":"Expression is not valid: unbalanced brackets"}
 ```
 
 
 4) Status 500 Internal Server Error: unsupported symbol
+
+**Запрос**
 ```
 curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"20+15a\"}" http://localhost:8080/api/v1/calculate
 ```
+
+**Ответ**
+
 ```
 {"error":"Internal server error: expression is not valid: unsupported symbol"}
 ```
 
 
 5) Status 422 Unprocessable Entity: division by zero
+
+**Запрос**
 ```
 curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"20/0\"}" http://localhost:8080/api/v1/calculate
 ```
+
+**Ответ**
+
 ```
 {"error":"Expression is not valid: division by zero"}
 ```
