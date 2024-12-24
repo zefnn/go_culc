@@ -43,7 +43,7 @@ curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"2+2*2\"}
 {"result":6}
 ```
 
-2) Status 422 Unprocessable Entity
+2) Status 422 Unprocessable Entity: not enough operands
 ```
 curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"2+2*\"}" http://localhost:8080/api/v1/calculate
 ```
@@ -51,7 +51,7 @@ curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"2+2*\"}"
 {"error":"Expression is not valid: not enough operands"}
 ```
 
-3) Status 422 Unprocessable Entity
+3) Status 422 Unprocessable Entity: unbalanced brackets
 ```
 curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"2+2)\"}" http://localhost:8080/api/v1/calculate
 ```
@@ -60,7 +60,7 @@ curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"2+2)\"}"
 ```
 
 
-4) Status 500 Internal Server Error
+4) Status 500 Internal Server Error: unsupported symbol
 ```
 curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"20+15a\"}" http://localhost:8080/api/v1/calculate
 ```
@@ -69,7 +69,7 @@ curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"20+15a\"
 ```
 
 
-5) Status 422 Unprocessable Entity
+5) Status 422 Unprocessable Entity: division by zero
 ```
 curl -X POST -H "Content-Type: application/json" -d "{\"expression\": \"20/0\"}" http://localhost:8080/api/v1/calculate
 ```
